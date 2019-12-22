@@ -22,15 +22,15 @@ class HouseBackendService  {
     return this.houseBackendService.post(`/houses/search`, house)
     .then(response => response)
   }
-  // updateOneHouse(id, updateHouse){
-  //   return this.houseBackendService.put(`/houses/${id}/update`, updateHouse)
-  //   .then(response => response)
-  // }
+  updateOneHouse(id, updateHouse){
+    return this.houseBackendService.put(`/houses/${id}/update`, updateHouse)
+    .then(response => response)
+  }
 
-  // deleteOneHouse(id){
-  //   return this.houseBackendService.delete(`/houses/${id}/delete`)
-  //   .then(response => response)
-  // }
+  deleteOneHouse(id){
+    return this.houseBackendService.delete(`/houses/${id}/delete`)
+    .then(response => response)
+  }
 
 
   // searchReferencia(vivienda){

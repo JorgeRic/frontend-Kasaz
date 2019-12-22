@@ -10,6 +10,7 @@ import AnonRoute from './components/AnonRoute'
 import PrivateRoute from './components/PrivateRoute'
 
 import Home from './pages/Home'
+import Update from './pages/Update'
 import List from './pages/List';
 import Details from './pages/Details'
 import Signup from './pages/Signup';
@@ -28,12 +29,12 @@ function App() {
             <Bar />
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path = '/houses' exact component = {List} />
-              <Route path = '/houses/create' exact component = {Create} />
+              <Route path = '/houses' exact component = {List} />  
               <Route path = '/houses/search' exact component = {Search} />
               <Route path = '/houses/details/:id' exact component={Details} />
-              <PrivateRoute  path="/houses/private" exact component={Private} />
-             
+              <PrivateRoute  path="/private" exact component={Private} />
+              <PrivateRoute  path="/houses/update" component={Update} />
+              <PrivateRoute  path="/houses/create" component={Create} />
               <Route path= '/signup' component={Signup} />
               <AnonRoute path="/login" exact component={Login} />
               <Route component = {NotFound}/>

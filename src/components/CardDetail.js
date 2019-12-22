@@ -16,6 +16,7 @@ function CardDetail(props) {
         </div>
         <div className="card-title mt-2">
           <h3>{house.title}</h3>
+          <h5>{house.city} - {house.address}</h5>
           <p>{house.description}</p>
         </div>
         <div className="">

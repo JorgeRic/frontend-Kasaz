@@ -16,6 +16,7 @@ function Card(props) {
         </div>
         <div className="card-title mt-2">
           <h3>{house.title}</h3>
+          <h5>{house.city} - {house.address}</h5>
         </div>
         <div className="">
           <div className=" d-flex justify-content-center flex-nowrap  ">         

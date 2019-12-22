@@ -75,3 +75,18 @@ li{
   user-select: none;
   cursor: pointer;
 }
+.datos-creacion{
+  margin: 10px;
+  font-size: 1.2em
+}
+.margenes-creacion-vivienda{
+  margin-top: 10px;
+}
+.letra{
+  color: black;
+  font-size: 1.2em
+}
+.letra-signup{
+  color: black;
+  font-size: 2em
+}

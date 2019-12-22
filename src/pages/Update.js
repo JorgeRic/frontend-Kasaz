@@ -2,51 +2,42 @@ import React, { Component } from 'react'
 import houseBackendService from '../service/house-service'
 import { Redirect } from 'react-router-dom'
 
-class Create extends Component {
+
+class Update extends Component {
   state={
-    title: '',
-    price: 0,
-    type: '',
-    image: '',
-    numBedrooms: 0,
-    numBaths: 0,
-    description: '',
-    meters: 0,
+    houses:[],
     redirect: false,
-    city:'',
-    address: '',
-    important: ''
+    mensaje: 'Datos Modificados',
+    modificado: false
   }
-  handleSubmit= (event) => {
-    const {title, price, type, image, city, address, important, numBedrooms, numBaths, description, meters} = this.state;
-    event.preventDefault();
-    houseBackendService.addOneHouse({
-      title, 
-      price, 
-      type, 
-      image, 
-      numBedrooms, 
-      numBaths, 
-      description, 
-      meters,
-      city,
-      address,
-      important
-    })
-    .then((response)=>{
-      console.log(response)
+  getFreshData = () => {
+    houseBackendService.getAllHouses()
+      .then(response => {
       this.setState({
-        redirect: true
+      houses: response.data.listOfHouses
       })
     })
-    .catch(error =>{console.log(error)})
-    }
+  }
+  componentDidMount(){
+    this.getFreshData()
+  }
 
   handleOnChange = (event)=> {
     const {name,value} = event.target;
     this.setState({
       [name]: value
     });
+  }
+  onSuccessfulSubmit = ()=> {
+    this.setState({
+      modificado: true
+    }, () => {
+      setTimeout(()=>{
+        this.setState({
+          redirect: true
+        })
+      }, 3000)
+    })
   }
   render() {
     const {title, price, type, image,city, address, important, numBedrooms, numBaths, description, meters, redirect} = this.state;
@@ -123,5 +114,4 @@ class Create extends Component {
   }
 }
 
-export default Create
-
+export default Update
