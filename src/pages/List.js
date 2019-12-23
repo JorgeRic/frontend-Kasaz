@@ -47,7 +47,7 @@ class List extends Component {
   render() {
     const {houses, numHouses, paginador} = this.state
     
-    console.log(numHouses)
+    console.log(houses)
     console.log(paginador)
     return (
         <div className="container d-flex">
@@ -57,6 +57,7 @@ class List extends Component {
                 return (
                   <div  key={house._id}>
                     <Card 
+                      mostrarUnaFoto={true}
                       house={house}    
                     />
                   <div className="text-center">

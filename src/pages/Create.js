@@ -1,23 +1,24 @@
 import React, { Component } from 'react'
 import houseBackendService from '../service/house-service'
 import { Redirect } from 'react-router-dom'
+import FileComponent from '../components/FileComponent'
 
 class Create extends Component {
   state={
     title: '',
-    price: 0,
+    price: '',
     type: '',
-    image: '',
-    numBedrooms: 0,
-    numBaths: 0,
+    image: [],
+    numBedrooms: '',
+    numBaths: '',
     description: '',
-    meters: 0,
+    meters: '',
     redirect: false,
     city:'',
     address: '',
     important: '',
-    mensaje: 'Vivienda creada',
-    modificado: false
+    message: 'Nueva Vivienda Creada',
+    success: false
   }
   handleSubmit= (event) => {
     const {title, price, type, image, city, address, important, numBedrooms, numBaths, description, meters} = this.state;
@@ -49,7 +50,7 @@ class Create extends Component {
   }
   onSuccessfulSubmit = ()=> {
     this.setState({
-      modificado: true
+      success: true
     }, () => {
       setTimeout(()=>{
         this.setState({
@@ -61,14 +62,17 @@ class Create extends Component {
   goToPreviousPage = () => {
     this.props.history.goBack()
   }
+  onUploadFinished = filename => {
+    this.setState({image: this.state.image.concat(filename)});
+  };
   render() {
-    const {title, mensaje, modificado, price, type, image,city, address, important, numBedrooms, numBaths, description, meters, redirect} = this.state;
+    const {title, message, success, price, type ,city, address, important, numBedrooms, numBaths, description, meters, redirect} = this.state;
 
     return (
 
       <div className="mt-2 text-center">
            <h1>Crear Nueva Vivienda</h1>
-           { modificado ? <h4 className="mail-enviado bg-success p-4">{mensaje}</h4> : '' }
+           { success ? <h4 className="mail-enviado bg-success p-4">{message}</h4> : '' }
            <form onSubmit={this.handleSubmit}>
           <div className="d-flex">
             <label htmlFor='title' className="datos-creacion mr-2">Titulo</label>
@@ -83,12 +87,14 @@ class Create extends Component {
             <input type='text'className="mr-5 p-3 border-warning form-control letra mb-1" id='address' name='address' value={address} onChange={this.handleOnChange}/>
           </div>
           <div className="d-flex">
-          <label htmlFor='price' className="datos-creacion">precio</label>
+          <label htmlFor='price' className="datos-creacion">Precio</label>
             <input type='number' className="mr-5 p-3 border-warning form-control letra mb-1" id='price' name='price' value={price} onChange={this.handleOnChange}/>
           </div>  
-          <div className="d-flex">
-          <label htmlFor='image'className="datos-creacion">Imagen</label>
-            <input type='text' className="mr-5 p-3 border-warning form-control letra mb-1" id='image' name='image' value={image} onChange={this.handleOnChange}/>
+          {/* <div className="d-flex">
+          <label htmlFor='image'className="datos-creacion">Imagenes</label> */}
+          <div className="d-flex justify-content-center">
+          <FileComponent id="image" className="w-25"  onUploadFinished={this.onUploadFinished}/>        
+          {/* </div> */}
           </div>
           <div className="d-flex">
           <label htmlFor='numBedrooms' className="datos-creacion">Num Hab</label> 
@@ -128,7 +134,7 @@ class Create extends Component {
                 <option value='true'>Si</option>
               </select>
             </div>
-             { modificado ? <h4 className="mail-enviado bg-success p-4">{mensaje}</h4> : '' }
+             { success ? <h4 className="mail-enviado bg-success p-4">{message}</h4> : '' }
              <button type='submit' className=" btn btn-outline-success btn-small mt-4 mb-1 col-6"><h4>Crear Vivienda</h4></button>
              <button className=" btn btn-outline-warning btn-small mt-4 mb-1 col-6" onClick={this.goToPreviousPage}><h4>Volver</h4></button>
            </form>

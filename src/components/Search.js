@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import houseBackendService from '../service/house-service'
 import Card from '../components/Card'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class Search extends Component {
   state = {
@@ -10,7 +10,10 @@ class Search extends Component {
     priceMin: '',
     priceMax:'',
     numBedrooms: null,
-    houses: []
+    houses: [],
+    message: 'En estos momentos no tenemos viviendas de estas caracteristicas en nuestra Cartera',
+    empty: false,
+    redirect: false
   };
   handleFormSubmit= (event) => {
     
@@ -25,6 +28,9 @@ class Search extends Component {
       numBedrooms
     })
     .then((houses) => {
+      if(houses.data.length===0){
+        this.onSuccessfulSubmit()
+      }
         this.setState({
           houses
         })
@@ -32,9 +38,20 @@ class Search extends Component {
       .catch (error => {console.log(error)
       })
     };
+    onSuccessfulSubmit = ()=> {
+      this.setState({
+        empty: true
+      }, () => {
+        setTimeout(()=>{
+          this.setState({
+            empty: false
+          })
+        }, 3000)
+      })
+    }
     
   handleChange = (event) => { 
-    console.log("picked!!", event.target);
+    // console.log("picked!!", event.target);
     const {name, value} = event.target;
     this.setState({[name]: value});
   };
@@ -46,11 +63,12 @@ class Search extends Component {
   };
 
   render() {
-    const {priceMin, metersMin, metersMax, priceMax, houses} =this.state
+    const {priceMin, empty, message, metersMin, metersMax, priceMax, houses} =this.state
     return (
       <>
       <div >
         <form onSubmit={this.handleFormSubmit} >
+        { empty? <h4 className="bg-danger p-4">{message}</h4> : '' }
           <div className="justify-content-center text-center">
 
             <h3>Precios</h3>

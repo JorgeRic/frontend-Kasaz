@@ -33,9 +33,9 @@ class Home extends Component {
       <div className="text-center">
         <h2>Viviendas Destacadas</h2>
       </div>
-        <div className="container d-flex">
-          <div className="row justify-content-center">
-            <div className="col-xs-10 col-md-8 ">
+        <div className="container col-12">
+          <div className="flex-row d-flex justify-content-center">
+            <div className="col-xs-10 col-md-8">
                 {houses.length > 0 ? houses.map((house)=> {
                 return (
                   <div  key={house._id}>

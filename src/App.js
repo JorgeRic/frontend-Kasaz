@@ -19,6 +19,14 @@ import Create from './pages/Create'
 import Private from './pages/Private';
 import NotFound from './pages/NotFound'
 // import Update from './pages/Update'
+import firebase from "firebase";
+ 
+const config = {
+  apiKey: "AIzaSyCYpHiA65Eis2pTbr9mPREUT_-qPJl5DbY",
+  authDomain: "kasaz-f2313.firebaseapp.com",
+  storageBucket: "gs://kasaz-f2313.appspot.com"
+};
+firebase.initializeApp(config);
 
 function App() {
   return (
