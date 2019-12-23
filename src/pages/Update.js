@@ -5,27 +5,72 @@ import { Redirect } from 'react-router-dom'
 
 class Update extends Component {
   state={
-    houses:[],
+    title: '',
+    price: '',
+    type: '',
+    image: '',
+    numBedrooms: '',
+    numBaths: '',
+    description: '',
+    meters: '',
     redirect: false,
+    city:'',
+    address: '',
+    important: '',
     mensaje: 'Datos Modificados',
     modificado: false
   }
-  getFreshData = () => {
-    houseBackendService.getAllHouses()
-      .then(response => {
+  componentDidMount(){
+    const {id} = this.props.match.params
+    console.log(id)
+    houseBackendService.getOneHouse(id)
+    .then((response)=> {
       this.setState({
-      houses: response.data.listOfHouses
-      })
+        title: response.data.title,
+        price: response.data.price,
+        type: response.data.type,
+        image: response.data.image,
+        numBedrooms: response.data.numBedrooms,
+        numBaths: response.data.numBaths,
+        description: response.data.description,
+        meters: response.data.meters,
+        city:response.data.city,
+        address: response.data.address,
+        important: response.data.important
+       })
+     })
+    .catch((error)=>{
+      console.log(error)
     })
   }
-  componentDidMount(){
-    this.getFreshData()
+  handleSubmit = (event) => {
+    const {title, price, type, image, city, address, important, numBedrooms, numBaths, description, meters} = this.state;
+    const{id} = this.props.match.params
+    event.preventDefault()
+    houseBackendService.updateOneHouse(id, {
+      title, 
+      price, 
+      type, 
+      image, 
+      numBedrooms, 
+      numBaths, 
+      description, 
+      meters,
+      city,
+      address,
+      important
+    })
+    .then(() => {
+      this.onSuccessfulSubmit()
+    })
+    .catch(error => console.log(error))
   }
 
   handleOnChange = (event)=> {
     const {name,value} = event.target;
     this.setState({
-      [name]: value
+      [name]: value,
+
     });
   }
   onSuccessfulSubmit = ()=> {
@@ -39,13 +84,17 @@ class Update extends Component {
       }, 3000)
     })
   }
+  goToPreviousPage = () => {
+    this.props.history.goBack()
+  }
   render() {
-    const {title, price, type, image,city, address, important, numBedrooms, numBaths, description, meters, redirect} = this.state;
+    const {title, mensaje, modificado, price, type, image,city, address, important, numBedrooms, numBaths, description, meters, redirect} = this.state;
 
     return (
 
       <div className="mt-2 text-center">
-           <h1>Crear Nueva Vivienda</h1>
+           <h1>Modificar Vivienda</h1>
+           { modificado ? <h4 className="mail-enviado bg-success p-4">{mensaje}</h4> : '' }
            <form onSubmit={this.handleSubmit}>
           <div className="d-flex">
             <label htmlFor='title' className="datos-creacion mr-2">Titulo</label>
@@ -105,7 +154,9 @@ class Update extends Component {
                 <option value='true'>Si</option>
               </select>
             </div>
-             <button type='submit' className=" btn btn-outline-success btn-small mt-4 mb-5 col-6"><h3>Crear Nueva Vvienda</h3></button>
+             { modificado ? <h4 className="mail-enviado bg-success p-4">{mensaje}</h4> : '' }
+             <button type='submit' className=" btn btn-outline-success btn-small  mt-4 mb-1 col-6"><h4>Modificar Datos</h4></button>
+             <button className=" btn btn-outline-warning btn-small mt-4 mb-1 col-6 " onClick={this.goToPreviousPage}><h4>Volver</h4></button>
            </form>
            {redirect ? <Redirect to = '/houses'/> : null}
         </div>

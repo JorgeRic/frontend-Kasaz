@@ -15,7 +15,9 @@ class Create extends Component {
     redirect: false,
     city:'',
     address: '',
-    important: ''
+    important: '',
+    mensaje: 'Vivienda creada',
+    modificado: false
   }
   handleSubmit= (event) => {
     const {title, price, type, image, city, address, important, numBedrooms, numBaths, description, meters} = this.state;
@@ -34,10 +36,7 @@ class Create extends Component {
       important
     })
     .then((response)=>{
-      console.log(response)
-      this.setState({
-        redirect: true
-      })
+      this.onSuccessfulSubmit()
     })
     .catch(error =>{console.log(error)})
     }
@@ -48,13 +47,28 @@ class Create extends Component {
       [name]: value
     });
   }
+  onSuccessfulSubmit = ()=> {
+    this.setState({
+      modificado: true
+    }, () => {
+      setTimeout(()=>{
+        this.setState({
+          redirect: true
+        })
+      }, 3000)
+    })
+  }
+  goToPreviousPage = () => {
+    this.props.history.goBack()
+  }
   render() {
-    const {title, price, type, image,city, address, important, numBedrooms, numBaths, description, meters, redirect} = this.state;
+    const {title, mensaje, modificado, price, type, image,city, address, important, numBedrooms, numBaths, description, meters, redirect} = this.state;
 
     return (
 
       <div className="mt-2 text-center">
            <h1>Crear Nueva Vivienda</h1>
+           { modificado ? <h4 className="mail-enviado bg-success p-4">{mensaje}</h4> : '' }
            <form onSubmit={this.handleSubmit}>
           <div className="d-flex">
             <label htmlFor='title' className="datos-creacion mr-2">Titulo</label>
@@ -114,7 +128,9 @@ class Create extends Component {
                 <option value='true'>Si</option>
               </select>
             </div>
-             <button type='submit' className=" btn btn-outline-success btn-small mt-4 mb-5 col-6"><h3>Crear Nueva Vvienda</h3></button>
+             { modificado ? <h4 className="mail-enviado bg-success p-4">{mensaje}</h4> : '' }
+             <button type='submit' className=" btn btn-outline-success btn-small mt-4 mb-1 col-6"><h4>Crear Vivienda</h4></button>
+             <button className=" btn btn-outline-warning btn-small mt-4 mb-1 col-6" onClick={this.goToPreviousPage}><h4>Volver</h4></button>
            </form>
            {redirect ? <Redirect to = '/houses'/> : null}
         </div>

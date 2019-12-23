@@ -76,7 +76,7 @@ class Private extends Component {
                     />
                   <div className="text-center">
                     <Link to={`/houses/details/${house._id}`}><button type="button" className="btn w-80 btn-warning bar mb-4">Ver Datos Vivienda</button></Link>
-                    <Link to={`/houses/update`}><button type="button" className="btn w-80 btn-warning bar mb-4">Modificar Datos Vivienda</button></Link>
+                    <Link to={`/houses/update/${house._id}`}><button type="button" className="btn w-80 btn-warning bar mb-4">Modificar Datos Vivienda</button></Link>
                     <button type="button" className="btn w-80 btn-danger bar mb-4" onClick={()=> {
                       this.handleDeleteClick(house._id)
                     }}>Borrar</button>

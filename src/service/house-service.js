@@ -32,12 +32,6 @@ class HouseBackendService  {
     .then(response => response)
   }
 
-
-  // searchReferencia(vivienda){
-  //   return this.houseBackendService.post(`/houses/search`, vivienda)
-  //   .then(response => response)
-  // }
-
   getOneHouse(id){
     return this.houseBackendService.get(`/houses/${id}/details`)
     .then(response => response)
