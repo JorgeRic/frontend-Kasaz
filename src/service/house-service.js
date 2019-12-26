@@ -8,8 +8,8 @@ class HouseBackendService  {
     })
   }
 
-  getAllHouses(){
-   return this.houseBackendService.get('/houses')
+  getAllHouses(page, per_page){
+   return this.houseBackendService.get(`/houses?page=${page}&per_page=${per_page}`)
    .then(response => response)
   }
 

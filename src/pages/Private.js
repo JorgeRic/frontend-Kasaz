@@ -19,7 +19,7 @@ class Private extends Component {
   componentDidMount(){
     houseBackendService.getAllHouses()
     .then(response => {
-      console.log(response)
+      // console.log(response)
       this.setState({
         houses: response.data.listOfHouses,
         numHouses: response.data.numHouses
@@ -60,8 +60,6 @@ class Private extends Component {
   render() {
     const {houses, numHouses, paginador} = this.state
     
-    console.log(numHouses)
-    console.log(paginador)
     return (
         <div className="container d-flex">
           <div className="row justify-content-center d-flex">

@@ -20,13 +20,12 @@ class Home extends Component {
       this.setState({
         houses: filterHouses
       })
-      console.log(filterHouses)
+      // console.log(filterHouses)
     })
   }
 
   render() {
     const {houses} = this.state
-    console.log(houses)
 
     return (
       <>
@@ -40,6 +39,7 @@ class Home extends Component {
                 return (
                   <div  key={house._id}>
                     <Card 
+                      showOnePicture={true}
                       house={house}    
                     />
                   <div className="text-center">

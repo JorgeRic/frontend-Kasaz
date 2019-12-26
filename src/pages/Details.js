@@ -10,9 +10,9 @@ class Details extends Component {
     const {id} = this.props.match.params
     houseBackendService.getOneHouse(id)
     .then((response)=> {
-      // console.log(response)
+      console.log(response.data.image)
       this.setState({
-        house: response.data
+        house: response.data,
        })
      })
     .catch((error)=>{
@@ -21,6 +21,12 @@ class Details extends Component {
   }
   goToPreviousPage = () => {
     this.props.history.goBack()
+  }
+  nextImage = () => {
+
+  }
+  previousImage = () => {
+
   }
   render() {
     const {house} = this.state

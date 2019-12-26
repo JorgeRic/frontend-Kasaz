@@ -2,7 +2,6 @@ import React from 'react'
 
 function CardDetail(props) {
   const {house} = props;
-  console.log(house.image)
   const sqm = Math.floor(house.price / house.meters)
 
   return (
@@ -10,9 +9,8 @@ function CardDetail(props) {
       <div className="card text-center mt-3 col-12">
         <div className="card-header text-center bg-warning">
         {house.image ? house.image.map((img) => {
-          return (<img className="img-fluid p-2 mb-1 img-thumbnail card-img-top mx-auto d-block" key={img} src={img}/>)
+          return (<img alt="imagen" className="img-fluid p-2 mb-1 img-thumbnail card-img-top mx-auto d-block" key={img} src={img}/>)
           }) : null}
-          {/* <img src={house.image} className="img-fluid p-2 mb-1 img-thumbnail card-img-top mx-auto d-block" alt={house.title}/> */}
           <div className="mt-3 mb-2">
             <h3 className="">Price: {house.price} €</h3>
             <p>{sqm} €/m<sup>2</sup></p>

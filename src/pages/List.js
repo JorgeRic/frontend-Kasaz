@@ -5,23 +5,27 @@ import Card from '../components/Card'
 import Paginador from '../components/Paginador'
 
 class List extends Component {
-  limite = 5
   state= {
     houses: [],
     paginador: {
-      actual: 1,
-      offset:0
+      page: 1,
+      per_page: 5
     },
-    numHouses: ''
+    numHouses: '', 
   }
 
+
   componentDidMount(){
-    houseBackendService.getAllHouses()
+    this.loadHouses()
+  }
+  loadHouses(){
+    const {paginador} = this.state
+    // console.log("paginador", paginador)
+    houseBackendService.getAllHouses(paginador.page, paginador.per_page)
     .then(response => {
-      console.log(response)
       this.setState({
         houses: response.data.listOfHouses,
-        numHouses: response.data.numHouses
+        numHouses: response.data.numHouses,
       })
     })
   }
@@ -29,26 +33,24 @@ class List extends Component {
   pagePrevious = () => {
     this.setState({
       paginador:{
-        offset: this.state.paginador.offset - this.limite,
-        actual: this.state.paginador.actual - 1
+        per_page: this.state.paginador.per_page,
+        page: this.state.paginador.page - 1,
       }
-    })
+    }, this.loadHouses)
   }
 
   pageNext = () => {
     this.setState({
       paginador:{
-        offset: this.state.paginador.offset + this.limite,
-        actual: this.state.paginador.actual + 1
+        per_page: this.state.paginador.per_page,
+        page: this.state.paginador.page + 1
       }
-    })
+    }, this.loadHouses)
   }
   
   render() {
     const {houses, numHouses, paginador} = this.state
-    
-    console.log(houses)
-    console.log(paginador)
+
     return (
         <div className="container d-flex">
           <div className="row justify-content-center">
@@ -57,8 +59,7 @@ class List extends Component {
                 return (
                   <div  key={house._id}>
                     <Card 
-                      mostrarUnaFoto={true}
-                      house={house}    
+                      house={house}  
                     />
                   <div className="text-center">
                     <Link to={`/houses/details/${house._id}`}><button type="button" className="btn w-80 btn-warning bar mb-4">Ver Datos Vivienda</button></Link>
@@ -69,9 +70,9 @@ class List extends Component {
 
             </div>
             <Paginador 
-              actual= {paginador.actual}
+              page= {paginador.page}
               numHouses = {numHouses}
-              limite={this.limite}
+              per_page={paginador.per_page}
               pagePrevious={this.pagePrevious}
               pageNext={this.pageNext}
             />

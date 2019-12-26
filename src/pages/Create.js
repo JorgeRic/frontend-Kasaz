@@ -71,7 +71,7 @@ class Create extends Component {
     return (
 
       <div className="mt-2 text-center">
-           <h1>Crear Nueva Vivienda</h1>
+           <h2>Crear Nueva Vivienda</h2>
            { success ? <h4 className="mail-enviado bg-success p-4">{message}</h4> : '' }
            <form onSubmit={this.handleSubmit}>
           <div className="d-flex">
@@ -79,7 +79,7 @@ class Create extends Component {
               <input type='text' className="mr-5 p-3 border-warning form-control letra mb-1" id='title' name='title' value={title} onChange={this.handleOnChange}/>
           </div>
           <div className="d-flex">
-            <label htmlFor='city' className="datos-creacion">Ciudad</label>
+            <label htmlFor='city' className="datos-creacion ">Ciudad</label>
               <input type='text' id='city' className="mr-5 p-3 border-warning form-control letra mb-1" name='city' value={city} onChange={this.handleOnChange}/>
           </div>
           <div className="d-flex">

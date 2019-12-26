@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import houseBackendService from '../service/house-service'
 import Card from '../components/Card'
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Search extends Component {
   state = {
@@ -73,7 +73,7 @@ class Search extends Component {
 
             <h3>Precios</h3>
             <div className="d-flex justify-content-center">
-              <select name="priceMin" className="border-warning btn col-5 select-search" onChange={this.handleChange } value={priceMin} id="priceMin">
+              <select name="priceMin" className="border-warning btn btn col-5" onChange={this.handleChange } value={priceMin} id="priceMin">
                 <option value=''>Precio Minimo</option>
                 <option value='0'>desde 0</option>
                 <option value='50000'>desde 50000</option>
@@ -84,7 +84,7 @@ class Search extends Component {
                 <option value='300000'>desde 300000</option>
               </select>
                 <pre>   __   </pre>
-              <select name="priceMax" className="border-warning btn col-5 select-search" onChange={this.handleChange } value={priceMax} id="priceMax">
+              <select name="priceMax" className="border-warning btn col-5" onChange={this.handleChange } value={priceMax} id="priceMax">
                 <option value=''>Precio maximo</option>
                 <option value='100000'>hasta 100000</option>
                 <option value='200000'>hasta 200000</option>
@@ -96,7 +96,7 @@ class Search extends Component {
             </div>
             <h3 className="mt-2">Tamaños</h3>
             <div className="d-flex justify-content-center">
-              <select name="metersMin" className="border-warning btn col-5 select-search" onChange={this.handleChange } value={metersMin} id="metersMin">
+              <select name="metersMin" className="border-warning btn col-5" onChange={this.handleChange } value={metersMin} id="metersMin">
                 <option value=''>Metros minimos</option>
                 <option value='50'>50</option>
                 <option value='100'>100</option>
@@ -104,7 +104,7 @@ class Search extends Component {
                 <option value='200'>200</option>
               </select>
               <pre>   __   </pre>
-              <select name="metersMax" className="border-warning btn col-5 select-search" onChange={this.handleChange } value={metersMax} id="metersMax">
+              <select name="metersMax" className="border-warning btn col-5" onChange={this.handleChange } value={metersMax} id="metersMax">
                 <option value=''>Metros maximos</option>
                 <option value='100'>100</option>
                 <option value='150'>150</option>
@@ -114,12 +114,12 @@ class Search extends Component {
               </div>
               <h3 className="mt-2">Habitaciones</h3>
               <div className="btn-group">
-                <div onClick={this.handleChangeRooms} value="0" className="border-warning btn-success btn-lg btn col-3 select-search" name="numBedrooms">Todas</div>
-                <div onClick={this.handleChangeRooms} value="1" className="border-warning btn btn-warning white col-3 btn-lg select-search" name="numBedrooms">1+</div>
-                <div onClick={this.handleChangeRooms} value="2" className="border-warning btn btn-warning white col-3 btn-lg select-search" name="numBedrooms">2+</div>
-                <div onClick={this.handleChangeRooms} value="3" className="border-warning btn-warning white btn col-3 btn-lg select-search" name="numBedrooms">3+</div>
-                <div onClick={this.handleChangeRooms} value="4" className="border-warning btn-warning white btn col-3 btn-lg select-search" name="numBedrooms">4+</div>
-                <div onClick={this.handleChangeRooms} value="5" className="border-warning btn-warning white btn col-3 btn-lg select-search" name="numBedrooms">5+</div>
+                <div onClick={this.handleChangeRooms} value="0" className="border-warning btn-success btn-lg btn col-3" name="numBedrooms">Todas</div>
+                <div onClick={this.handleChangeRooms} value="1" className="border-warning btn btn-warning white col-3 btn-lg" name="numBedrooms">1+</div>
+                <div onClick={this.handleChangeRooms} value="2" className="border-warning btn btn-warning white col-3 btn-lg" name="numBedrooms">2+</div>
+                <div onClick={this.handleChangeRooms} value="3" className="border-warning btn-warning white btn col-3 btn-lg" name="numBedrooms">3+</div>
+                <div onClick={this.handleChangeRooms} value="4" className="border-warning btn-warning white btn col-3 btn-lg" name="numBedrooms">4+</div>
+                <div onClick={this.handleChangeRooms} value="5" className="border-warning btn-warning white btn col-3 btn-lg" name="numBedrooms">5+</div>
               </div>
               <div className="text-center">
                 <button className="btn btn-outline-warning mt-4 mb-2 col-6" type="submit" ><h3>Search</h3></button>
