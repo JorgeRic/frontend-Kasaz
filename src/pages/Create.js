@@ -72,7 +72,7 @@ class Create extends Component {
 
       <div className="mt-2 text-center">
            <h2>Crear Nueva Vivienda</h2>
-           { success ? <h4 className="mail-enviado bg-success p-4">{message}</h4> : '' }
+           { success ? <h4 className="bg-success message p-4">{message}</h4> : '' }
            <form onSubmit={this.handleSubmit}>
           <div className="d-flex">
             <label htmlFor='title' className="datos-creacion mr-2">Titulo</label>
@@ -90,11 +90,8 @@ class Create extends Component {
           <label htmlFor='price' className="datos-creacion">Precio</label>
             <input type='number' className="mr-5 p-3 border-warning form-control letra mb-1" id='price' name='price' value={price} onChange={this.handleOnChange}/>
           </div>  
-          {/* <div className="d-flex">
-          <label htmlFor='image'className="datos-creacion">Imagenes</label> */}
           <div className="d-flex justify-content-center">
-          <FileComponent id="image" className="w-25"  onUploadFinished={this.onUploadFinished}/>        
-          {/* </div> */}
+            <FileComponent id="image" className="w-25"  onUploadFinished={this.onUploadFinished}/>        
           </div>
           <div className="d-flex">
           <label htmlFor='numBedrooms' className="datos-creacion">Num Hab</label> 
@@ -134,7 +131,7 @@ class Create extends Component {
                 <option value='true'>Si</option>
               </select>
             </div>
-             { success ? <h4 className="mail-enviado bg-success p-4">{message}</h4> : '' }
+             { success ? <h4 className="bg-success message p-4">{message}</h4> : '' }
              <button type='submit' className=" btn btn-outline-success btn-small mt-4 mb-1 col-6"><h4>Crear Vivienda</h4></button>
              <button className=" btn btn-outline-warning btn-small mt-4 mb-1 col-6" onClick={this.goToPreviousPage}><h4>Volver</h4></button>
            </form>

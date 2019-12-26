@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import houseBackendService from '../service/house-service'
 import { Redirect } from 'react-router-dom'
+import FileComponent from '../components/FileComponent'
 
 
 class Update extends Component {
@@ -8,7 +9,7 @@ class Update extends Component {
     title: '',
     price: '',
     type: '',
-    image: '',
+    image: [],
     numBedrooms: '',
     numBaths: '',
     description: '',
@@ -17,8 +18,8 @@ class Update extends Component {
     city:'',
     address: '',
     important: '',
-    mensaje: 'Datos Modificados',
-    modificado: false
+    message: 'Datos Modificados',
+    update: false
   }
   componentDidMount(){
     const {id} = this.props.match.params
@@ -75,7 +76,7 @@ class Update extends Component {
   }
   onSuccessfulSubmit = ()=> {
     this.setState({
-      modificado: true
+      update: true
     }, () => {
       setTimeout(()=>{
         this.setState({
@@ -87,14 +88,17 @@ class Update extends Component {
   goToPreviousPage = () => {
     this.props.history.goBack()
   }
+  onUploadFinished = filename => {
+    this.setState({image: this.state.image.concat(filename)});
+  };
   render() {
-    const {title, mensaje, modificado, price, type, image,city, address, important, numBedrooms, numBaths, description, meters, redirect} = this.state;
+    const {title, message, update, price, type, city, address, important, numBedrooms, numBaths, description, meters, redirect} = this.state;
 
     return (
 
       <div className="mt-2 text-center">
            <h1>Modificar Vivienda</h1>
-           { modificado ? <h4 className="mail-enviado bg-success p-4">{mensaje}</h4> : '' }
+           { update ? <h4 className=" bg-success p-4 message">{message}</h4> : '' }
            <form onSubmit={this.handleSubmit}>
           <div className="d-flex">
             <label htmlFor='title' className="datos-creacion mr-2">Titulo</label>
@@ -112,9 +116,8 @@ class Update extends Component {
           <label htmlFor='price' className="datos-creacion">precio</label>
             <input type='number' className="mr-5 p-3 border-warning form-control letra mb-1" id='price' name='price' value={price} onChange={this.handleOnChange}/>
           </div>  
-          <div className="d-flex">
-          <label htmlFor='image'className="datos-creacion">Imagen</label>
-            <input type='text' className="mr-5 p-3 border-warning form-control letra mb-1" id='image' name='image' value={image} onChange={this.handleOnChange}/>
+          <div className="d-flex justify-content-center">
+            <FileComponent id="image" className="w-25"  onUploadFinished={this.onUploadFinished}/>        
           </div>
           <div className="d-flex">
           <label htmlFor='numBedrooms' className="datos-creacion">Num Hab</label> 
@@ -154,7 +157,7 @@ class Update extends Component {
                 <option value='true'>Si</option>
               </select>
             </div>
-             { modificado ? <h4 className="mail-enviado bg-success p-4">{mensaje}</h4> : '' }
+             { update ? <h4 className="bg-success p-4 message">{message}</h4> : '' }
              <button type='submit' className=" btn btn-outline-success btn-small  mt-4 mb-1 col-6"><h4>Modificar Datos</h4></button>
              <button className=" btn btn-outline-warning btn-small mt-4 mb-1 col-6 " onClick={this.goToPreviousPage}><h4>Volver</h4></button>
            </form>

@@ -5,15 +5,15 @@ import Card from '../components/Card'
 import Paginador from '../components/Paginador'
 
 class List extends Component {
+
   state= {
     houses: [],
     paginador: {
       page: 1,
       per_page: 5
     },
-    numHouses: '', 
+    numHouses: ''
   }
-
 
   componentDidMount(){
     this.loadHouses()

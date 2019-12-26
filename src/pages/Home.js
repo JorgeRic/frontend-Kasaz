@@ -1,17 +1,27 @@
 
-
 import React, { Component } from 'react'
 import houseBackendService from '../service/house-service'
 import { Link } from 'react-router-dom';
 import Card from '../components/Card'
+import Paginador from '../components/Paginador'
 
 class Home extends Component {
   state= {
-    houses: []
+    houses: [],
+    paginador: {
+      page: 1,
+      per_page: 5
+    },
+    numHouses: ''
   }
 
   componentDidMount(){
-    houseBackendService.getAllHouses()
+    this.loadHouses()
+  }
+
+  loadHouses(){
+    const {paginador} = this.state
+    houseBackendService.getAllHouses(paginador.page, paginador.per_page)
     .then(response => {
       const allHouses = response.data.listOfHouses
       const filterHouses = allHouses.filter((house)=>{
@@ -24,8 +34,26 @@ class Home extends Component {
     })
   }
 
+  pagePrevious = () => {
+    this.setState({
+      paginador:{
+        per_page: this.state.paginador.per_page,
+        page: this.state.paginador.page - 1,
+      }
+    }, this.loadHouses)
+  }
+
+  pageNext = () => {
+    this.setState({
+      paginador:{
+        per_page: this.state.paginador.per_page,
+        page: this.state.paginador.page + 1
+      }
+    }, this.loadHouses)
+  }
+
   render() {
-    const {houses} = this.state
+    const {houses, numHouses, paginador} = this.state
 
     return (
       <>
@@ -50,6 +78,13 @@ class Home extends Component {
                 }): <p>Loading...</p>}
             </div>
          </div>
+            <Paginador 
+              page= {paginador.page}
+              numHouses = {numHouses}
+              per_page={paginador.per_page}
+              pagePrevious={this.pagePrevious}
+              pageNext={this.pageNext}
+            />
         </div>
       </>
     )

@@ -10,7 +10,7 @@ class Details extends Component {
     const {id} = this.props.match.params
     houseBackendService.getOneHouse(id)
     .then((response)=> {
-      console.log(response.data.image)
+      // console.log(response.data.image)
       this.setState({
         house: response.data,
        })
