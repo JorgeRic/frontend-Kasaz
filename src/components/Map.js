@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {GoogleMap, withScriptjs, withGoogleMap, Marker} from 'react-google-maps'
 import houseBackendService from '../service/house-service';
-const { MarkerWithLabel } = require("react-google-maps/lib/components/addons/MarkerWithLabel");
+import { Link } from 'react-router-dom';
 
 
 class Map extends Component {
@@ -21,16 +21,20 @@ class Map extends Component {
     })
   }
   displayMarkers = () => {
-    if(typeof google != undefined){
       return this.state.houses.map((house, index) => {
         return <Marker key={index} id={index} position={{
          lat: parseFloat(house.lat),
          lng: parseFloat(house.long),
         }}
+        // labelAnchor={{x:0,y:0}}
+        // label= {house.price}
+        // icon= {'https://cdn3.iconfinder.com/data/icons/softwaredemo/PNG/256x256/Box_Green.png'}
         // labelAnchor= {new google.maps.Point(22, 0)}
-        onClick={() => console.log('hola')} />
+        onClick={() => {
+          window.location = `/houses/details/${house._id}`
+        }}
+        ></Marker>
       })
-    }
   }
   render(){
     const {houses} = this.state
