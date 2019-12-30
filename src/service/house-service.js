@@ -3,7 +3,7 @@ import axios from 'axios'
 class HouseBackendService  {
   constructor(){
     this.houseBackendService = axios.create({
-        baseURL: `${process.env.REACT_APP_BACKEND_DOMAIN}/api`,
+        baseURL: process.env.REACT_APP_BACKEND_DOMAIN+'/api',
         withCredentials: true,
     })
   }

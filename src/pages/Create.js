@@ -138,7 +138,7 @@ class Create extends Component {
           <label htmlFor='important' className="datos-creacion">Vivienda Destacada?</label>
             <div className="mr-5 ml-5">
               <select id='important' className="border-warning form-control letra" value={important} onChange={this.handleOnChange} name='important'>
-                <option value=''></option>
+                <option value=''>Elegir</option>
                 <option value='false'>No</option>
                 <option value='true'>Si</option>
               </select>

@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react'
+
 class Card extends Component {
   state={
     house: this.props.house,
@@ -23,14 +24,14 @@ class Card extends Component {
     const btnPrevios = (contador > 0) ? 
     <button type="button" className="btn btn-success btn-small" onClick={this.reduce.bind(this)} value="Anterior"><small>Anterior</small></button> : '';
     const btnNext = (contador !== house.image.length - 1)  ? 
-    <button type="button" className="btn btn-success btn-small" onClick={this.increase.bind(this)} value="Siguiente"><small>Siguiente</small></button> : '';
+    <button type="button" className="btn btn-success btn-small ml-1" onClick={this.increase.bind(this)} value="Siguiente"><small>Siguiente</small></button> : '';
 
     return (
     <div className="card">
       <div className="card text-center mt-3 col-12">
         <div className="card-header text-center bg-warning">
           <img className="img-fluid w-80" src={house.image[contador]} alt="imagen vivienda"/>
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-center">
             {btnPrevios}
             {btnNext}
           </div>
@@ -41,7 +42,8 @@ class Card extends Component {
         </div>
         <div className="card-title mt-2">
           <h3>{house.title}</h3>
-          <h5>{house.city} - {house.address}</h5>
+          <h5>{house.city} - {house.address}</h5> 
+
         </div>
         <div className="">
            <div className=" d-flex justify-content-center flex-nowrap  ">         
