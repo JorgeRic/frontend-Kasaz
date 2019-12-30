@@ -61,6 +61,7 @@ class Home extends Component {
         <Bar />
       </div>
       <div className="text-center">
+        <h5>Administrador - username: jorge / password: jorge</h5>
         <h2>Viviendas Destacadas</h2>
       </div>
         <div className="container col-12">

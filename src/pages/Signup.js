@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import withAuth from '../components/withAuth.js'
-
+import { Redirect } from 'react-router-dom'
 
 class Signup extends Component {
 
   state = {
     username: '',
     password: '',
+    message: 'Nuevo Administrador Creado',
+    success: false,
+    redirect: false,
   };
 
   handleFormSubmit = (event) => {
@@ -15,7 +18,7 @@ class Signup extends Component {
     const password = this.state.password;
     this.props.signup({ username, password })
       .then( (user) => {
-        console.log(user)
+        this.onSuccessfulSubmit()
         this.setState({
             username: '',
             password: '',
@@ -28,6 +31,17 @@ class Signup extends Component {
     const {name, value} = event.target;
     this.setState({[name]: value});
   }
+  onSuccessfulSubmit = ()=> {
+    this.setState({
+      success: true
+    }, () => {
+      setTimeout(()=>{
+        this.setState({
+          redirect: true
+        })
+      }, 3000)
+    })
+  }
   validarForm(){
     const { username, password } = this.state
     const noValido = !username || !password || password.length < 5
@@ -35,7 +49,7 @@ class Signup extends Component {
   }
 
   render() {
-    const { username, password } = this.state;
+    const { username, password, redirect, message, success } = this.state;
     return (
       
       <div className="main-login mr-5 ml-5">
@@ -47,8 +61,9 @@ class Signup extends Component {
           <div className="text-center">
           <button type='submit' disabled={this.validarForm()} value="signup" className="btn btn-outline-success btn-small mt-4 mb-5"><h3>Signup</h3></button>
           </div>
+          { success ? <h4 className="bg-success message p-4">{message}</h4> : '' }
         </form>
-
+        {redirect ? <Redirect to = '/private'/> : null}
       </div>
       
     )
