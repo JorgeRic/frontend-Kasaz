@@ -3,7 +3,6 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 
 import Header from './components/Header';
-import Bar from './components/Bar'
 import Search from './components/Search'
 import AuthProvider from './context/AuthContext.js'
 import AnonRoute from './components/AnonRoute'
@@ -18,7 +17,6 @@ import Login from './pages/Login';
 import Create from './pages/Create'
 import Private from './pages/Private';
 import NotFound from './pages/NotFound'
-// import Update from './pages/Update'
 import firebase from "firebase";
  
 const config = {
@@ -34,7 +32,6 @@ function App() {
       <AuthProvider>
         <div className="App">
             <Header />
-            <Bar />
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path = '/houses' exact component = {List} />  

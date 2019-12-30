@@ -4,6 +4,7 @@ import houseBackendService from '../service/house-service'
 import { Link } from 'react-router-dom';
 import Card from '../components/Card'
 import Paginador from '../components/Paginador'
+import Bar from '../components/Bar'
 
 class Home extends Component {
   state= {
@@ -54,9 +55,11 @@ class Home extends Component {
 
   render() {
     const {houses, numHouses, paginador} = this.state
-
     return (
       <>
+      <div className="text-center">
+        <Bar />
+      </div>
       <div className="text-center">
         <h2>Viviendas Destacadas</h2>
       </div>
@@ -67,7 +70,6 @@ class Home extends Component {
                 return (
                   <div  key={house._id}>
                     <Card 
-                      showOnePicture={true}
                       house={house}    
                     />
                   <div className="text-center">

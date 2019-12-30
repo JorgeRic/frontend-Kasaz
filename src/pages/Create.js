@@ -16,12 +16,14 @@ class Create extends Component {
     redirect: false,
     city:'',
     address: '',
+    lat: '',
+    long: '',
     important: '',
     message: 'Nueva Vivienda Creada',
     success: false
   }
   handleSubmit= (event) => {
-    const {title, price, type, image, city, address, important, numBedrooms, numBaths, description, meters} = this.state;
+    const {title, price, type, lat, long, image, city, address, important, numBedrooms, numBaths, description, meters} = this.state;
     event.preventDefault();
     houseBackendService.addOneHouse({
       title, 
@@ -34,7 +36,9 @@ class Create extends Component {
       meters,
       city,
       address,
-      important
+      important,
+      lat, 
+      long
     })
     .then((response)=>{
       this.onSuccessfulSubmit()
@@ -66,7 +70,7 @@ class Create extends Component {
     this.setState({image: this.state.image.concat(filename)});
   };
   render() {
-    const {title, message, success, price, type ,city, address, important, numBedrooms, numBaths, description, meters, redirect} = this.state;
+    const {title, lat, long, message, success, price, type ,city, address, important, numBedrooms, numBaths, description, meters, redirect} = this.state;
 
     return (
 
@@ -113,7 +117,7 @@ class Create extends Component {
           </div>
           <label htmlFor='type' className="datos-creacion">Tipo de Vivienda</label>
             <div className="mr-5 ml-5">
-              <select id='type' className="border-warning form-control letra" value={type} onChange={this.handleOnChange} name='type'>
+              <select id='type' className="border-warning form-control letra mb-1" value={type} onChange={this.handleOnChange} name='type'>
                 <option value=''>Elegir</option>
                 <option value='piso'>Piso</option>
                 <option value='chalet'>Chalet</option>
@@ -123,7 +127,15 @@ class Create extends Component {
                 <option value='atico'>Atico</option>
               </select>
             </div>
-            <label htmlFor='important' className="datos-creacion">Vivienda Destacada?</label>
+          <div className="d-flex">
+          <label htmlFor="lat" className="datos-creacion">Latitud</label>
+            <input type="number" id="lat" className="mr-5 p-3 border-warning form-control letra mb-1" placeholder="" onChange={this.handleOnChange } name= "lat" value={lat} ></input>
+          </div>
+          <div className="d-flex">
+          <label htmlFor="long" className="datos-creacion">Longitud</label>
+            <input type="number" id="long" className="mr-5 p-3 border-warning form-control letra mb-1" placeholder="" onChange={this.handleOnChange } name= "long" value={long} ></input>
+          </div>
+          <label htmlFor='important' className="datos-creacion">Vivienda Destacada?</label>
             <div className="mr-5 ml-5">
               <select id='important' className="border-warning form-control letra" value={important} onChange={this.handleOnChange} name='important'>
                 <option value=''></option>

@@ -18,12 +18,14 @@ class Update extends Component {
     city:'',
     address: '',
     important: '',
+    lat: '',
+    long: '',
     message: 'Datos Modificados',
     update: false
   }
   componentDidMount(){
     const {id} = this.props.match.params
-    console.log(id)
+    // console.log(id)
     houseBackendService.getOneHouse(id)
     .then((response)=> {
       this.setState({
@@ -37,7 +39,9 @@ class Update extends Component {
         meters: response.data.meters,
         city:response.data.city,
         address: response.data.address,
-        important: response.data.important
+        important: response.data.important,
+        lat: response.data.lat,
+        long: response.data.long
        })
      })
     .catch((error)=>{
@@ -45,7 +49,7 @@ class Update extends Component {
     })
   }
   handleSubmit = (event) => {
-    const {title, price, type, image, city, address, important, numBedrooms, numBaths, description, meters} = this.state;
+    const {title, price, type, image, city, address, important, numBedrooms, numBaths, description, meters, lat, long} = this.state;
     const{id} = this.props.match.params
     event.preventDefault()
     houseBackendService.updateOneHouse(id, {
@@ -59,7 +63,9 @@ class Update extends Component {
       meters,
       city,
       address,
-      important
+      important,
+      lat, 
+      long
     })
     .then(() => {
       this.onSuccessfulSubmit()
@@ -92,7 +98,7 @@ class Update extends Component {
     this.setState({image: this.state.image.concat(filename)});
   };
   render() {
-    const {title, message, update, price, type, city, address, important, numBedrooms, numBaths, description, meters, redirect} = this.state;
+    const {title, message, update, price, type, city, address, important, numBedrooms, numBaths, description, meters, redirect, lat, long} = this.state;
 
     return (
 
@@ -139,7 +145,7 @@ class Update extends Component {
           </div>
           <label htmlFor='type' className="datos-creacion">Tipo de Vivienda</label>
             <div className="mr-5 ml-5">
-              <select id='type' className="border-warning form-control letra" value={type} onChange={this.handleOnChange} name='type'>
+              <select id='type' className="border-warning form-control letra mb-1" value={type} onChange={this.handleOnChange} name='type'>
                 <option value=''>Elegir</option>
                 <option value='piso'>Piso</option>
                 <option value='chalet'>Chalet</option>
@@ -149,6 +155,14 @@ class Update extends Component {
                 <option value='atico'>Atico</option>
               </select>
             </div>
+            <div className="d-flex">
+            <label htmlFor="lat" className="datos-creacion">Latitud</label>
+              <input type="number" id="lat" className="mr-5 p-3 border-warning form-control letra mb-1" onChange={this.handleOnChange } name= "lat" value={lat} ></input>
+            </div>
+            <div className="d-flex">
+            <label htmlFor="long" className="datos-creacion">Longitud</label>
+              <input type="number" id="long" className="mr-5 p-3 border-warning form-control letra mb-1" onChange={this.handleOnChange } name= "long" value={long} ></input>
+            </div>
             <label htmlFor='important' className="datos-creacion">Vivienda Destacada?</label>
             <div className="mr-5 ml-5">
               <select id='important' className="border-warning form-control letra" value={important} onChange={this.handleOnChange} name='important'>
@@ -157,11 +171,11 @@ class Update extends Component {
                 <option value='true'>Si</option>
               </select>
             </div>
-             { update ? <h4 className="bg-success p-4 message">{message}</h4> : '' }
+             { update ? <h4 className="bg-success p-4 message mt-1">{message}</h4> : '' }
              <button type='submit' className=" btn btn-outline-success btn-small  mt-4 mb-1 col-6"><h4>Modificar Datos</h4></button>
              <button className=" btn btn-outline-warning btn-small mt-4 mb-1 col-6 " onClick={this.goToPreviousPage}><h4>Volver</h4></button>
            </form>
-           {redirect ? <Redirect to = '/houses'/> : null}
+           {redirect ? <Redirect to = '/private'/> : null}
         </div>
 
     )

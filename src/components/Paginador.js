@@ -13,7 +13,6 @@ class Paginador extends Component {
       Anterior
     </button>: ''
     
-    const {pages} = this.state.paginador
     const btnNext = (this.props.page > 0 && this.props.page < num_pages) ? 
     <button type = "button" onClick={this.props.pageNext} className="btn btn-success">
       Siguiente

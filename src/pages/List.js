@@ -3,6 +3,7 @@ import houseBackendService from '../service/house-service'
 import { Link } from 'react-router-dom';
 import Card from '../components/Card'
 import Paginador from '../components/Paginador'
+import Bar from '../components/Bar'
 
 class List extends Component {
 
@@ -52,6 +53,10 @@ class List extends Component {
     const {houses, numHouses, paginador} = this.state
 
     return (
+      <>
+       <div className="text-center">
+        <Bar />
+      </div>
         <div className="container d-flex">
           <div className="row justify-content-center">
             <div className="col-xs-12 col-md-10 ">
@@ -78,6 +83,7 @@ class List extends Component {
             />
          </div>
         </div>
+      </>
     )
   }
 }

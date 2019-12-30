@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import houseBackendService from '../service/house-service'
 import Card from '../components/Card'
 import Paginador from '../components/Paginador'
+import Bar from '../components/Bar'
 
 class Private extends Component {
 
@@ -79,6 +80,10 @@ componentDidMount(){
     const {houses, numHouses, paginador, success, message} = this.state
     
     return (
+      <>
+      <div className="text-center">
+        <Bar />
+      </div>
         <div className="container d-flex">
           <div className="row justify-content-center d-flex">
           <Link to='/signup' className=""><button className="btn btn-outline-warning mr-1 mt-2 mb-2" ><h3>Crear Nuevo Usuario</h3></button></Link>
@@ -113,7 +118,8 @@ componentDidMount(){
               pageNext={this.pageNext}
             />
          </div>
-        </div>
+      </div>
+    </>
     )
   }
 }
