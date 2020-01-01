@@ -1,68 +1,89 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Kasaz
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+Application created to help users find the home they are looking for, and to help logged-in users offer those homes to their clients
 
-### `npm start`
+## User Stories
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- 404: As an anonymous/user I can see a page 404 if I try to reach a page that does not exist.
+- Register: As an administrator I can log in and create passwords so that other people can log in and be administrators.
+- As a non-loginned user I can see the properties that are in the portfolio through the list or do searches by map, amount of money, square meters of the properties and number of rooms
+- Login: As a user I can access the platform to add, modify or remove properties from my portfolio.
+- Logging out: As a user I can log out of the platform.
+- The users who are not logged in will be able to see pictures of houses, have a complete description and have access to the location of the houses.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Routes
 
-### `npm test`
+- /Home - Shows the featured homes in our portfolio.
+- /Private - allows you to create new administrators, delete, create and modify properties.
+- /Create - creates new homes.
+- /Update - allows you to modify the data of the properties.
+- /List - allows you to view the properties in your portfolio.
+- /Details - allows you to see all the information about the property.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Components
 
-### `npm run build`
+Header
+Bar
+Card
+CardDetail
+AnonRoute
+Map
+Paginador
+withAuth
+PrivateRoute
+Search
+FileComponent
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Authoring Service
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+auth.login(user)
+auth.signup(user)
+auth.logout()
+auth.me()
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Routes backend
 
-### `npm run eject`
+|Method|URL|Description|
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+|POST|'/auth/login' | Check if the user is in the database |
+|POST|'auth/signup' | Create new user in database|
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+|GET|'/auth/logout' | User Logout
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+|GET|'/houses/' | Shows all the houses and serves to create the pager|
+|GET|'/houses/:id/details' | Show the details of a house|
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+|PUT|'/houses/:id/update' | Modify the data of the house in the database
+|DELETE|'/houses/:id/delete' | Remove the house from the database
+|POST|'/houses/new' | Includes housing in the database|
 
-## Learn More
+## Models
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+User: 
+- username
+- password
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Houses:
+- title
+- price 
+- type ['piso', 'chalet', 'planta baja', 'bungalow', 'apartamento', 'atico']
+- image
+- numBedrooms
+- numBaths
+- meters
+- description
+- city
+- address
+- important
+- lat
+- long
 
-### Code Splitting
+## GitHub
+https://github.com/JorgeRic/backend-kasaz
+https://github.com/JorgeRic/frontend-kasaz
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Heroku
+https://kasaz-f2313.firebaseapp.com
