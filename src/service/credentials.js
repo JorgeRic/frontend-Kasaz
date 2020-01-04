@@ -1,1 +1,1 @@
-export default{mapsKey: 'AIzaSyCr7Vyle3rbq07y1aI2vcqAO-49gC1lzRY'}
+export default{mapsKey: process.env.REACT_APP_MAPS}

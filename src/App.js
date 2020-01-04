@@ -1,11 +1,12 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
+import firebase from "firebase";
 // require('dotenv').config()
+import AuthProvider from './context/AuthContext.js'
 
 import Header from './components/Header';
 import Search from './components/Search'
-import AuthProvider from './context/AuthContext.js'
 import AnonRoute from './components/AnonRoute'
 import PrivateRoute from './components/PrivateRoute'
 
@@ -18,7 +19,6 @@ import Login from './pages/Login';
 import Create from './pages/Create'
 import Private from './pages/Private';
 import NotFound from './pages/NotFound'
-import firebase from "firebase";
  
 const config = {
   apiKey: "AIzaSyCYpHiA65Eis2pTbr9mPREUT_-qPJl5DbY",
